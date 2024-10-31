@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="banner">
+            <h1>
+                <a href="{% url 'home' %}" class="font-weight-bold">WhereToGo</a>
+            </h1>
+        </div>
+        <div class="login-container">
+            <div class="login-button">
+                <a href="{% url 'profile' %}">{{ user.username }}</a> 
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <h2>Perfil</h2>
+            <p style="text-align: center;">Nombre de usuario: {{ user.username }}</p>
+            <div class="button-group">
+                <button onclick="location.href='{% url 'mytrips' %}'">Mis viajes</button>
+            </div>
+            <div class="button-group">
+                <form action="{% url 'logout_view' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+                
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 WhereToGo. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

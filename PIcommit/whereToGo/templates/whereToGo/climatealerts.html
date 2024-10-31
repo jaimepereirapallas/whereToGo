@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas Climáticas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center py-3">
+                <div class="banner">
+                    <h1>
+                        <a href="{% url 'home' %}" class="font-weight-bold">WhereToGo</a>
+                    </h1>
+                </div>
+                <div class="text-right">
+                    {% if request.user.username %}
+                    <a href="{% url 'profile' %}" class="btn btn-primary">{{ request.user.username }}</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container my-5">
+        <div class="header-title mb-4">
+            <a href="javascript:history.back()" class="btn btn-link">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M5.854 4.146a.5.5 0 0 1 0 .708L3.207 7.5H14.5a.5.5 0 0 1 0 1H3.207l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Volver
+            </a>
+            <h2 class="text-center">Evolución del tiempo a lo largo del día</h2>
+        </div>
+        {% if cambios_climaticos %}
+            <div class="alert alert-danger" role="alert">
+                Alerta meteorológica: ¡Se esperan cambios climáticos significativos para el día del vuelo!
+            </div>
+        {% else %}
+            <div class="alert alert-success" role="alert">
+                No hay alertas meteorológicas para el día del vuelo.
+            </div>
+        {% endif %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Temperatura (°C)</th>
+                    <th>Precipitación (mm)</th>
+                    <th>Cobertura de Nubes (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if weather_data_list %}
+                    {% for data in weather_data_list %}
+                        <tr>
+                            <td>{{ data.date|date:"H:i" }}</td>
+                            <td>{{ data.temperature_2m }}</td>
+                            <td>{{ data.precipitation }}</td>
+                            <td>{{ data.cloud_cover }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4">No hay datos climáticos disponibles.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

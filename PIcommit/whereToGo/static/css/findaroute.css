@@ -1,0 +1,163 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 100%; 
+}
+.header-title {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header-title h2 {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.banner {
+    margin-left: 5%;
+    flex-grow: 300; 
+    text-align: center; 
+}
+
+.login-container {
+    display: flex;
+    justify-content: flex-end; 
+    flex-grow: 1; 
+}
+.content {
+    padding: 20px;
+}
+.city-image-container {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.city-image-container img {
+    width: 100%;
+    display: block;
+}
+.info-section {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+.info-box {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+.info-box h3 {
+    margin-bottom: 15px;
+}
+.info-box p {
+    margin: 5px 0;
+}
+.info-box.avion {
+    border-left: 5px solid #007bff;
+}
+.info-box.coche {
+    border-left: 5px solid #28a745;
+}
+.route-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+}
+.route-info img {
+    max-width: 50px;
+    margin-right: 15px;
+}
+.route-info .route-details {
+    flex-grow: 1;
+}
+.route-info .route-details p {
+    margin: 0;
+}
+.route-info .btn-container {
+    margin-left: 20px;
+}
+.route-info .btn-container button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.route-details {
+    display: flex;
+    justify-content: space-between;
+}
+.route-details-left {
+    text-align: left; 
+}
+.route-details-right {
+    text-align: right; 
+}
+.plain-details-left {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center; 
+}
+
+.route-details p {
+    margin: 5px 0;
+}
+
+.green {
+    color: green; 
+}
+.arrow {
+    font-size: 30px; 
+    font-weight: bold; 
+    margin: 0 10px;
+}
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 2%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+}
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    margin-top: 0;
+    padding: 30px;
+    height: 10%;
+    width: 100%;
+    
+}

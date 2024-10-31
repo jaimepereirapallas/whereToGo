@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-left: auto; 
+    margin-right: auto; 
+    max-width: 100%; 
+}
+.banner {
+    margin-left: 5%;
+    flex-grow: 1; 
+    text-align: right; 
+}
+.login-container {
+    display: flex;
+    justify-content: flex-end; 
+    flex-grow: 1; 
+}
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.profile-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-section p {
+    margin-bottom: 10px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column; 
+}
+
+.button-group button {
+    margin: 10px; 
+    padding: 20px 30px; 
+    width: 220px; 
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-group button:hover {
+    background-color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 15%;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My trips</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center py-3">
+                <div class="banner">
+                    <h1>
+                        <a href="{% url 'home' %}" class="font-weight-bold">WhereToGo</a>
+                    </h1>
+                </div>
+                <div class="text-right">
+                    <a href="{% url 'profile' %}" class="btn btn-primary">{{ request.user.username }}</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container my-5">
+        <div class="header-title mb-4">
+                <a href="javascript:history.back()" class="btn btn-link">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.854 4.146a.5.5 0 0 1 0 .708L3.207 7.5H14.5a.5.5 0 0 1 0 1H3.207l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    Volver
+                </a>
+                <h2 class="text-center">My Trips</h2>
+        </div>
+        {% if trips %}
+            <div class="row">
+                {% for trip in trips %}
+                    <div class="col-md-6">
+                        <div class="card trip-card">
+                            <img src="{{ trip.image }}" class="card-img-top" alt="Trip Image">
+                            <div class="card-body">
+                                <h3 class="card-title">From {{ trip.origin }} to {{ trip.destination }}</h3>
+                                <p class="card-text">{{ trip.takeoff|date:"H:i" }} - {{ trip.arrival|date:"H:i" }} ({{ trip.escalas }})</p>
+                                <p class="card-text"><strong>{{ trip.takeoff|date:"D M Y" }}</strong></p>
+                                {% if trip.cambios_climaticos %}
+                                    <div class="alert alert-danger" role="alert">
+                                        Alerta meteorológica: ¡Se esperan cambios climáticos durante este viaje!
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-success" role="alert">
+                                        ¡Buenas condiciones climáticas para este viaje!
+                                    </div>
+                                {% endif %}
+                                <div class="d-flex justify-content-between w-55 mb-2">
+                                    <form method="post" action="{% url 'del_trips' %}" class="flex-grow-1">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="trip_id" value="{{ trip.id }}">
+                                        <button type="submit" class="btn btn-primary">Borrar</button>
+                                    </form>
+                                    <form method="post" action="{% url 'climatealerts' %}"  class="flex-grow-2">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="destino" value="{{ trip.destination }}">
+                                        <input type="hidden" name="fecha" value="{{ trip.takeoff|date:'Y-m-d' }}">
+                                        <button type="submit" class="btn btn-primary w-100">Ver Alertas Climáticas</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>You have no trips planned.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

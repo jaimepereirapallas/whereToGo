@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar por Localización</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/searchbylocation.css' %}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center py-3">
+                <div class="banner">
+                    <h1>
+                        <a href="{% url 'home' %}" class="font-weight-bold">WhereToGo</a>
+                    </h1>
+                </div>
+                <div class="text-right">
+                    {% if request.user.username %}
+                    <a href="{% url 'profile' %}" class="btn btn-primary">{{ request.user.username }}</a>
+                    
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="my-4">Temperaturas próximos 7 días</h2>
+                <img src="../../images/plottemperature.png" alt="Gráfico de temperaturas" class="img-fluid mb-4">
+            </div>
+            {% if current_temp %}
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title">Temperatura actual en {{ ubicacion }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text display-4">{{ current_temp }} °C</p>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="my-4">Temperaturas próximos 7 días</h2>
+                <img src="../../images/plottemperature.png" alt="Gráfico de temperaturas" class="img-fluid mb-4">
+            </div>
+            <div class="col-md-6">
+                <h2 class="my-4">Precipitaciones próximos 7 días</h2>
+                <img src="../../images/plotprecipitation.png" alt="Gráfico de precipitaciones" class="img-fluid mb-4">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 text-center">
+                <form method="post" action="{% url 'lugares_interes' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-sm btn-block mb-3">Ver lugares de interés</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-center">
+                <form method="post" action="{% url 'search_flights' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-sm btn-block">Buscar vuelos</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <p class="text-center">&copy; 2024 WhereToGo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

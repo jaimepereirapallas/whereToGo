@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Ofertas de Vuelos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/findaroute.css' %}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center py-3">
+                <div class="banner">
+                    <h1>
+                        <a href="{% url 'home' %}" class="font-weight-bold">WhereToGo</a>
+                    </h1>
+                </div>
+                <div class="text-right">
+                    {% if request.user.username %}
+                    <a href="{% url 'profile' %}" class="btn btn-primary">{{ request.user.username }}</a>
+                    
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt-5">
+        <div class="header-title mb-4">
+            <a href="javascript:history.back()" class="btn btn-link">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M5.854 4.146a.5.5 0 0 1 0 .708L3.207 7.5H14.5a.5.5 0 0 1 0 1H3.207l2.647 2.646a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Volver
+            </a>
+            <h2 class="mb-0">Búsqueda de ruta</h2>
+        </div>
+        <div class="info-section">
+            <div class="city-image-container">
+                <img src="{{ resultado.imagen }}" alt="Imagen destino">
+                <strong>{{resultado.destino_global}}</strong>
+            </div>
+            <div class="info-box">
+                {% if resultado %}
+                    <h3>Ruta Más Óptima:</h3>
+                    {% if resultado.ruta_mas_optima == "avion" %}
+                        <div class="route-info">
+                            <img src="../../images/coche.svg" class="img-fluid mb-2">
+                            <div class="route-details">
+                                <div class="route-details-left">
+                                    
+                                    <p><strong> Primer destino: </strong> {{ resultado.origen }}</p>
+                                </div>
+                                <div class="route-details-right">
+                                    <p><strong>Distancia al Aeropuerto:</strong> {{ resultado.distancia_coche }} km</p>
+                                    <p><strong>Tiempo al Aeropuerto:</strong> <span class="green">{{ resultado.tiempo_coche }}</span></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="route-info">
+                            <img src="../../images/avion.png" class="img-fluid mb-2">
+                            <div class="route-details">
+                                <div class="plain-details-left">
+                                    
+                                        <p>
+                                            <strong>{{ resultado.origen }}</strong> 
+                                            {% if resultado.destino %}
+                                                <span class="arrow">&#8594;</span>
+                                                <strong>{{ resultado.destino }}</strong> 
+                                            {% endif %}
+                                        </p>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <div class="btn-container">
+                                <form method="post" action="{% url 'search_flights' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if resultado.ruta_mas_optima == "coche" %}
+                        <div class="route-info">
+                            <img src="../../images/coche.svg" class="img-fluid mb-2">
+                            <div class="route-details">
+                                <div class="route-details-left">
+                                    <p><strong>Destino: </strong> {{ resultado.destino_global }}</p>
+                                </div>
+                                <div class="route-details-right">
+                                    <p><strong>Distancia:</strong> {{ resultado.distancia_coche }} km</p>
+                                    <p><strong>Tiempo:</strong> <span class="green">{{ resultado.tiempo_coche }}</span></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p>No hay resultados para mostrar.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container-fluid">
+        <p class="text-center">&copy; 2024 WhereToGo. Todos los derechos reservados.</p>
+    </div>
+</footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
