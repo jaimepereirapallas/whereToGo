@@ -25,14 +25,7 @@ El objetivo de la aplicación es ofrecer a los usuarios una plataforma completa 
     **Alertas Cambios Climáticos**: Para los viajes que el usuario tenga guardados, se hará una analisis de la temperatura de dicha zona durante las horas del día, y en caso de que de una hora a otra haya un cambio significativo con respecto a la temperatura, se mostrará una alerta. El objetivo de esta funcionalidad es detectar los picos/valles de la temperatura de nuestro viaje. 
 * Caso de uso 9 :
     **Recomendación de Destinos**: El usuario indicará que tipo de clima desea (Nubes, Sol, Lluvia), y las fechas de salida y llegada. En función de los criterios seleccionados, mediante un analisis del histórico de datos climáticos podremos recomendar al usuario lugares que cumplan con sus requisitos (nota: Es una estimación basada en datos pasados, por lo que podría a ver diferencias con una situación futura)
- 
-Integrantes del grupo:
-------------------
- 
-  * Yago Garcı́a Araújo <yago.garcia.araujo@udc.es>
-  * Jaime Pereira Pallas <jaime.pereira@udc.es>
-  * Jacobo Estévez Rouco <jacobo.erouco@udc.es> 
-  
+   
   
 Cómo ejecutar:
 --------------
